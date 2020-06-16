@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <style>
+
+    svg {
+            width: 100%;
+            height: 100%;
+            position: center;
+        }
+
+        text{
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+
+        .toolTip {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            position: absolute;
+            display: none;
+            width: auto;
+            height: auto;
+            background: none repeat scroll 0 0 white;
+            border: 0 none;
+            border-radius: 8px 8px 8px 8px;
+            box-shadow: -3px 3px 15px #888888;
+            color: black;
+            font: 12px sans-serif;
+            padding: 5px;
+            text-align: center;
+        }
+
+        .legend {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 60%;
+        }
+
+        rect {
+            stroke-width: 2;
+        }
+
+        text {
+            font: 10px sans-serif;
+        }
+
+        .axis text {
+            font: 10px sans-serif;
+        }
+
+        .axis path{
+            fill: none;
+            stroke: #000;
+        }
+
+        .axis line {
+            fill: none;
+            stroke: #000;
+            shape-rendering: crispEdges;
+        }
+
+        .axis .tick line {
+            stroke-width: 1;
+            stroke: rgba(0, 0, 0, 0.2);
+        }
+
+        .axisHorizontal path{
+            fill: none;
+        }
+
+        .axisHorizontal line {
+            fill: none;
+            stroke: #000;
+            shape-rendering: crispEdges;
+        }
+
+        .axisHorizontal .tick line {
+            stroke-width: 1;
+            stroke: rgba(0, 0, 0, 0.2);
+        }
+
+        .bar {
+            fill: steelblue;
+            fill-opacity: .9;
+        }
+
+        .x.axis path {
+            display: none;
+        }
+
+    </style>
+    <title>fit5147</title>
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicons -->
+    <link href="img/favicon.png" rel="icon">
+    <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+
+    <!-- Bootstrap CSS File -->
+    <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Libraries CSS Files -->
+    <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+<!--==========================
+  Header
+============================-->
+<header id="header">
+    <div class="container-fluid">
+
+        <div id="logo" class="pull-left">
+            <h1><a href="#intro" class="scrollto">league of legends</a></h1>
+
+        </div>
+
+        <nav id="nav-menu-container">
+            <ul class="nav-menu">
+                <li class="menu-active"><a href="index.html">Home</a></li>
+
+
+                <li class="menu-has-children"><a href="">SKT Analysis</a>
+                    <ul>
+                        <li><a href="barpage.html">see details</a></li>
+                        <li><a href="#about">see summary</a></li>
+
+                    </ul>
+                </li>
+                <li class="menu-has-children"><a href="">Role impact of the march result</a>
+                    <ul>
+                        <li><a href="barpage.html">see details</a></li>
+                        <li><a href="#about">see summary</a></li>
+
+                    </ul>
+                </li>
+                <li class="menu-has-children"><a href="">Role Analysis</a>
+                    <ul>
+                        <li><a href="barpage.html">see details</a></li>
+                        <li><a href="#about">see summary</a></li>
+
+                    </ul>
+                </li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav><!-- #nav-menu-container -->
+    </div>
+</header>
+
+<!--==========================
+  Intro Section
+============================-->
+<section id="intro">
+    <div class="intro-container">
+        <div id="introCarousel" class="carousel  slide carousel-fade" data-ride="carousel">
+
+            <ol class="carousel-indicators"></ol>
+
+            <div class="carousel-inner" role="listbox">
+
+                <div class="carousel-item active">
+                    <div class="carousel-background"><img src="img/intro-carousel/bar.jpg" alt=""></div>
+                    <div class="carousel-container">
+                        <div class="carousel-content">
+                            <h2>ROLE IMPACT </h2>
+                            <p>It has an important impact of march result</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- #intro -->
+
+<main id="main">
+
+
+
+    <!--<section>
+        div class="container">
+        <header class="section-header">
+            <h3>Role impact of the march result</h3>
+
+        </header>
+        </div>
+        <head>
+            <script type="text/javascript">
+                window.onload = function () {
+
+                    var chart = new CanvasJS.Chart("chartContainer", {
+                        animationEnabled: true,
+                        title:{
+                            text: " role impact of march result",
+                            color: "#DDC4C8",
+                        },
+                        axisY: {
+                            title: "carry percentage"
+                        },
+                        legend: {
+                            cursor:"role",
+                            itemclick : toggleDataSeries
+                        },
+                        toolTip: {
+                            shared: true,
+                            content: toolTipFormatter
+                        },
+                        data: [{
+                            type: "bar",
+                            showInLegend: true,
+                            name: "WINNING",
+                            color: "#DDC4C8",
+                            dataPoints: [
+                                { y: 95, label: "ADC" },
+                                { y: 36, label: "SUPPORT" },
+                                { y: 43, label: "MIDDLE" },
+                                { y: 73, label: "TOP" },
+                                { y: 69, label: "JUNGLE" }
+                            ]
+                        },
+                            {
+                                type: "bar",
+                                showInLegend: true,
+                                name: "LOSING",
+                                color: "#88A8D0",
+                                dataPoints: [
+                                    { y: 12, label: "ADC" },
+                                    { y: 86, label: "SUPPORT" },
+                                    { y: 72, label: "MIDDLE" },
+                                    { y: 99, label: "TOP" },
+                                    { y: 70, label: "JUNGLE" }
+                                ]
+                            },
+                            {
+                                type: "bar",
+                                showInLegend: true,
+                                name: "NORMAL",
+                                color: "#B1CAE0",
+                                dataPoints: [
+                                    { y: 36, label: "ADC" },
+                                    { y: 72, label: "SUPPORT" },
+                                    { y: 90, label: "MIDDLE" },
+                                    { y: 92, label: "TOP" },
+                                    { y: 85, label: "JUNGLE" }
+                                ]
+                            }]
+                    });
+                    chart.render();
+
+                    function toolTipFormatter(e) {
+                        var str = "";
+                        var str2 ;
+                        for (var i = 0; i < e.entries.length; i++){
+                            var str1 = "<span style= \"color:"+e.entries[i].dataSeries.color + "\">" + e.entries[i].dataSeries.name + "</span>: <strong>"+  e.entries[i].dataPoint.y + "</strong> <br/>" ;
+
+                            str = str.concat(str1);
+                        }
+                        str2 = "<strong>" + e.entries[0].dataPoint.label + "</strong> <br/>";
+
+                        return str2.concat(str);
+                    }
+
+                    function toggleDataSeries(e) {
+                        if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                            e.dataSeries.visible = false;
+                        }
+                        else {
+                            e.dataSeries.visible = true;
+                        }
+                        chart.render();
+                    }
+
+                }
+            </script>
+        </head>
+        <body>
+        <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+        </body>-->
+
+    </section>
+    <section id="skills">
+        <div class="container">
+            <header class="section-header">
+                <h3>Role impact of the march result</h3>
+            </header>
+        </div>
+        <script>
+            (function(window, d3){
+                var barchart = {
+                    init: init
+                };
+
+                function init(data){
+                    var margin = {
+                            top: (parseInt(d3.select('body').style('width'), 10)/10),
+                            right: (parseInt(d3.select('body').style('width'), 10)/5),
+                            bottom: (parseInt(d3.select('body').style('width'), 10)/5),
+                            left: (parseInt(d3.select('body').style('width'), 10)/20)
+                        },
+                        width = parseInt(d3.select('body').style('width'), 10) - margin.left - margin.right,
+                        height = parseInt(d3.select('body').style('height'), 10) - margin.top - margin.bottom;
+
+                    var x0 = d3.scale.ordinal()
+                        .rangeRoundBands([0, width], .1);
+
+                    var x1 = d3.scale.ordinal();
+
+                    var y = d3.scale.linear()
+                        .range([height, 0]);
+
+                    var colorRange = d3.scale.category20();
+                    var color = d3.scale.ordinal()
+                        .range(colorRange.range());
+
+                    var xAxis = d3.svg.axis()
+                        .scale(x0)
+                        .orient("bottom");
+
+                    var yAxis = d3.svg.axis()
+                        .scale(y)
+                        .orient("left")
+                        .tickFormat(d3.format(".2s"));
+
+                    var divTooltip = d3.select("body").append("div").attr("class", "toolTip");
+
+
+                    var svg = d3.select("body").append("svg")
+                        .attr("width", width + margin.left + margin.right)
+                        .attr("height", height + margin.top + margin.bottom)
+                        .append("g")
+                        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+                    dataset = [
+                        {"Role":"Top",
+                            "Data":
+                                [
+                                    {"Name":"Losing","Value":96},
+                                    {"Name":"Winning","Value":92},
+                                    {"Name":"Both","Value":90}]},
+
+                        {"Role":"Middle",
+                            "Data":
+                                [
+                                    {"Name":"Losing","Value":98},
+                                    {"Name":"Winning","Value":94},
+                                    {"Name":"Both","Value":90}]},
+                        {"Role":"Jungle","Data":
+                                [
+                                    {"Name":"Losing","Value":57},
+                                    {"Name":"Winning","Value":42},
+                                    {"Name":"Both","Value":90}]},
+                        {"Role":"ADC",
+                            "Data":
+                                [
+                                    {"Name":"Losing","Value":62},
+                                    {"Name":"Winning","Value":48},
+                                    {"Name":"Both","Value":90}
+                                ]
+                        },
+                        {"Role":"Support",
+                            "Data":
+                                [
+                                    {"Name":"Losing","Value":62},
+                                    {"Name":"Winning","Value":47},
+                                    {"Name":"Both","Value":90}
+                                ]
+                        }
+                      ]
+
+
+                    var options = ["Winning", "Losing","Both"];
+
+                    dataset[dataset.length-1].Data.forEach(function(d){
+                        d.isTotal = true;
+                    });
+
+                    x0.domain(dataset.map(function(d) { return d.Role; }));
+                    x1.domain(options).rangeRoundBands([0, x0.rangeBand()]);
+                    y.domain([0, d3.max(dataset, function(d) { return d3.max(d.Data, function(d) { return d.Value; }); })]);
+
+                    svg.append("g")
+                        .attr("class", "x axis")
+                        .attr("transform", "translate(0," + height + ")")
+                        .call(xAxis);
+
+                    svg.append("g")
+                        .attr("class", "y axis")
+                        .call(yAxis)
+                        .append("text")
+                        .attr("transform", "rotate(-90)")
+                        .attr("y", 6)
+                        .attr("dy", ".71em")
+                        .style("text-anchor", "end")
+                        .text("Carry percentage");
+
+                    var bar = svg.selectAll(".bar")
+                        .data(dataset)
+                        .enter().append("g")
+                        .attr("class", "rect")
+                        .attr("transform", function(d) { return "translate(" + x0(d.Role) + ",0)"; });
+
+                    bar.selectAll("rect")
+                        .data(function(d) { return d.Data; })
+                        .enter().append("rect")
+                        .attr("class","dbar")
+                        .attr("width", x1.rangeBand())
+                        .attr("x", function(d) { return x1(d.Name); })
+                        .attr("y", function(d) { return y(d.Value); })
+                        .attr("value", function(d){return d.Name;})
+                        .attr("height", function(d) { return height - y(d.Value); })
+                        .style("opacity", function(d) {if (d.isTotal){return 1} else {return 0.5} })
+                        .style("fill", function(d) { return color(d.Name); })
+                        .each(function(d){
+                        });
+
+                    var dbar = svg.selectAll('.dbar');
+                    bar
+                        .on("mousemove", function(d){
+                            divTooltip.style("left", d3.event.pageX+10+"px");
+                            divTooltip.style("top", d3.event.pageY-25+"px");
+                            divTooltip.style("display", "inline-block");
+                            var x = d3.event.pageX, y = d3.event.pageY
+                            var elements = document.querySelectorAll(':hover');
+                            l = elements.length
+                            l = l-1
+                            elementData = elements[l].__data__;
+                            var activeBar = window.activeBar = elements[l];
+                            divTooltip.html(elementData.Name+": "+(d.Role)+"'s carry percentage in "+" is"+elementData.Value);
+                            d3.select(activeBar).style('opacity', 1);
+                        });
+
+
+                    var legend = svg.selectAll(".legend")
+                        .data(options.slice())
+                        .enter().append("g")
+                        .attr("class", "legend")
+                        .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+
+                    legend.append("rect")
+                        .attr("x", width + 18)
+                        .attr("width", 18)
+                        .attr("height", 18)
+                        .style("fill", color);
+
+                    legend.append("text")
+                        .attr("x", width + 40)
+                        .attr("y", 9)
+                        .attr("dy", ".35em")
+                        .style("text-anchor", "start")
+                        .text(function(d) { return d; });
+
+                }
+                window.barchart = barchart;
+            })(window, d3);
+
+            barchart.init({});
+
+        </script>
+
+    </section>
+</main>
+
+
+
+<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+<!-- Uncomment below i you want to use a preloader -->
+<!-- <div id="preloader"></div> -->
+
+<!-- JavaScript Libraries -->
+<script src="lib/jquery/jquery.min.js"></script>
+<script src="lib/jquery/jquery-migrate.min.js"></script>
+<script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="lib/easing/easing.min.js"></script>
+<script src="lib/superfish/hoverIntent.js"></script>
+<script src="lib/superfish/superfish.min.js"></script>
+<script src="lib/wow/wow.min.js"></script>
+<script src="lib/waypoints/waypoints.min.js"></script>
+<script src="lib/counterup/counterup.min.js"></script>
+<script src="lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="lib/isotope/isotope.pkgd.min.js"></script>
+<script src="lib/lightbox/js/lightbox.min.js"></script>
+<script src="lib/touchSwipe/jquery.touchSwipe.min.js"></script>
+<!-- Contact Form JavaScript File -->
+<script src="contactform/contactform.js"></script>
+
+<!-- Template Main Javascript File -->
+<script src="js/main.js"></script>
+
+</body>
+</html>
