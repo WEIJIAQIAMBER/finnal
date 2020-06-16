@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta charset="utf-8">
+    <title>Champion select</title>
+
+
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+
+
+    <style> body {
+        background-color: white;
+        margin:0 auto;
+    }
+
+    h1{
+        font-family:helvetica,arial,sans-serif;
+        font-size:300%;
+        font-family:courier;
+        color:#34495e;
+    }
+
+    h2{
+        font-family:helvetica,arial,sans-serif;
+        font-size:16px;
+        font-style:oblique;
+        color:#00A6AA;
+    }
+
+    h3{
+        font-family:arial;
+        font-size:13px;
+        font-style:oblique;
+        color:#004855;
+    }
+
+    h4{
+        font-family:arial;
+        font-size:11px;
+        font-style:oblique;
+        color:#00A6AA;
+    }
+
+    p{
+        font-family:arial;
+        font-size:22px;
+        font-style:oblique;
+        color:#000000;
+    }
+
+
+
+    #container{
+        text-align:center;
+        width: 100%;
+    }
+
+    #header{
+        text-align:center;
+        width: 1366px;
+        min-height:100px;
+        height:auto;
+        padding-top:20px;
+        margin:0 auto;
+    }
+
+
+
+
+
+    #bubbleChart{
+
+    }
+
+
+    #providerSection{
+        text-align:center;
+        width: 960px;
+    }
+
+
+    circle {
+        fill:#3498DB;
+        stroke: black;
+        stroke-width:2px;
+        opacity: .8;
+    }
+
+    circle:hover {
+        stroke:#22A7F0;
+    }
+
+
+    .label {
+        fill: black;
+        font-size: 16px;
+    }
+
+    .ratingCategory1{
+        fill:#88DB54;
+    }
+
+    .ratingCategory2{
+        fill: url(#lowModGrad);
+    }
+
+    .ratingCategory3{
+        fill:#FE9A2E;
+    }
+
+    .ratingCategory4{
+        fill: url(#lowHighGrad);
+    }
+
+    .ratingCategory5{
+        fill: url(#modHighGrad);
+    }
+    .ratingCategory6{
+        fill:#FF0000;
+    }
+
+    .Low{
+        fill:#88DB54;
+    }
+
+    .Moderate{
+        fill:#FE9A2E;
+    }
+
+    .High{
+        fill:#FF0000;
+    }
+
+    .Suspended{
+        fill:#A4A4A4;
+    }
+    .All-Objects{
+        fill:#3498db;
+    }
+
+
+    .selected {
+        fill:#3498DB;
+        stroke: black;
+        stroke-width: 2px;
+    }
+
+
+    .yAxis path,
+    .yAxis line {
+        fill: none;
+        stroke: none;
+    }
+
+    .xAxis path,
+    .xAxis line {
+        fill: none;
+        stroke: #7f8c8d;
+    }
+
+
+    .yAxis text {
+        font-family: sans-serif;
+        font-size: 15px;
+        color: #ecf0f1;
+
+    }
+
+    .xAxis text {
+        font-family: arial;
+        font-size: 11px;
+        color: #ecf0f1;
+
+    }
+
+    .notes {
+        text-align:left;
+        padding-top: 10px;
+    }
+
+    .imageContainer {
+        text-align: center;
+        padding-top: 10px;
+    }</style>
+
+
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicons -->
+    <link href="img/favicon.png" rel="icon">
+    <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+
+
+    <!-- Libraries CSS Files -->
+    <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+<!--==========================
+  Header
+============================-->
+<header id="header">
+    <div class="container-fluid">
+
+        <div id="logo" class="pull-left">
+            <h1><a href="#intro" class="scrollto">league of legends</a></h1>
+
+        </div>
+
+        <nav id="nav-menu-container">
+            <ul class="nav-menu">
+                <li class="menu-active"><a href="index.html">Home</a></li>
+
+
+                <li class="menu-has-children"><a href="">SKT Analysis</a>
+                    <ul>
+                        <li><a href="barpage.html">see details</a></li>
+                        <li><a href="#about">see summary</a></li>
+
+                    </ul>
+                </li>
+                <li class="menu-has-children"><a href="">Team Color Analysis</a>
+                    <ul>
+                        <li><a href="barpage.html">see details</a></li>
+                        <li><a href="#about">see summary</a></li>
+
+                    </ul>
+                </li>
+                <li class="menu-has-children"><a href="">Role Analysis</a>
+                    <ul>
+                        <li><a href="barpage.html">see details</a></li>
+                        <li><a href="#about">see summary</a></li>
+
+                    </ul>
+                </li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav><!-- #nav-menu-container -->
+    </div>
+</header>
+
+<!--==========================
+  Intro Section
+============================-->
+<section id="intro">
+    <div class="intro-container">
+        <div id="introCarousel" class="carousel  slide carousel-fade" data-ride="carousel">
+
+            <ol class="carousel-indicators"></ol>
+
+            <div class="carousel-inner" role="listbox">
+
+                <div class="carousel-item active">
+                    <div class="carousel-background"><img src="img/intro-carousel/bar.jpg" alt=""></div>
+                    <div class="carousel-container">
+                        <div class="carousel-content">
+                            <h2>SKT-Champion select bar chat </h2>
+                            <p>One of the Most popular online game</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- #intro -->
+
+<main id="main">
+
+    <div id="container">
+
+
+        <div class="section-header">
+            <h3>player's personal impact</h3>
+            <p></p>
+
+        </div>
+        <div id="charts">
+
+            <div id="bubbleContainer">
+                <h2></h2>
+                <div id="overallRatings" class="btn-group btn-info top-btn" data-toggle="buttons">
+                    <label class="btn active ratingBtn" id="reset">
+                        <input type="radio" name="options">Reset</label>
+                    <label class="btn ratingBtn" id="banNumber">
+                        <input type="radio" name="options">ban numbers</label>
+                    <label class="btn ratingBtn" id="winningPercentage">
+                        <input type="radio" name="options">winningPercentage</label>
+                    <label class="btn ratingBtn" id="championName">
+                        <input type="radio" name="options">championName</label>
+                </div>
+                <div id="RiskCycle" class="btn-group btn-default top-btn" data-toggle="buttons">
+                    <!-- <label class="btn cycleBtn" id="2014">
+                         <input type="radio" name="options">2014</label>-->
+                    <label class="btn active cycleBtn" id="2015">
+                        <input type="radio" name="options">2015</label>
+                    <label class="btn active cycleBtn" id="2016">
+                        <input type="radio" name="options">2016</label>
+                    <label class="btn active cycleBtn" id="2017">
+                        <input type="radio" name="options">2017</label>
+                </div>
+                <div id="bubbleChart">
+                </div>
+            </div>
+        </div>
+
+        <script src="bubbles.js"></script>
+
+</main>
+</body>
+
+
+<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+<!-- Uncomment below i you want to use a preloader -->
+<!-- <div id="preloader"></div> -->
+
+<!-- JavaScript Libraries -->
+<script src="lib/jquery/jquery.min.js"></script>
+<script src="lib/jquery/jquery-migrate.min.js"></script>
+<script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="lib/easing/easing.min.js"></script>
+<script src="lib/superfish/hoverIntent.js"></script>
+<script src="lib/superfish/superfish.min.js"></script>
+<script src="lib/wow/wow.min.js"></script>
+<script src="lib/waypoints/waypoints.min.js"></script>
+<script src="lib/counterup/counterup.min.js"></script>
+<script src="lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="lib/isotope/isotope.pkgd.min.js"></script>
+<script src="lib/lightbox/js/lightbox.min.js"></script>
+<script src="lib/touchSwipe/jquery.touchSwipe.min.js"></script>
+<!-- Contact Form JavaScript File -->
+<script src="contactform/contactform.js"></script>
+
+<!-- Template Main Javascript File -->
+<script src="js/main.js"></script>
+
+</body>
+</html>
