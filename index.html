@@ -2,16 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>fit5147</title>
-
+  <title>winning factors of LoL</title>
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+  <!-- related packages-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js" charset="utf-8"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <meta content="" name="keywords">
-  <meta content="" name="description">
-
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -29,9 +28,7 @@
   <link href="css/style.css" rel="stylesheet">
 
 </head>
-<style>
 
-</style>
 <body>
 
   <!--==========================
@@ -50,29 +47,38 @@
         <ul class="nav-menu">
           <li class="menu-active"><a href="index.html">Home</a></li>
 
-
-          <li class="menu-has-children"><a href="">SKT Analysis</a>
-            <ul>
-              <li><a href="skt-page.html">see details</a></li>
-              <li><a href="#about">see summary</a></li>
-
-            </ul>
-          </li>
-          <li class="menu-has-children"><a href="">Role impact for the march result</a>
-            <ul>
-              <li><a href="barpage.html">see details</a></li>
-              <li><a href="#services">see summary</a></li>
-
-            </ul>
-          </li>
-          <li class="menu-has-children"><a href="roleImpact.html">ROLE IMPACT FOR THE MARCH RESULT ANALYSIS</a>
+          <li class="menu-has-children"><a href="">Role Impact</a>
             <ul>
               <li><a href="roleImpact.html">see details</a></li>
-              <li><a href="#about">see summary</a></li>
+              <li><a href="#skills">see summary</a></li>
 
             </ul>
           </li>
-          <li><a href="#contact">Contact</a></li>
+          <!-- Nav bar for team color-->
+          <li class="menu-has-children"><a href="linepage.html">Team Color Impact</a>
+            <ul>
+              <li><a href="linepage.html">see details</a></li>
+              <li><a href="#BanPick">see summary</a></li>
+
+            </ul>
+          </li>
+          <!-- Nav bar for b&p -->
+          <li class="menu-has-children"><a href="ALL team bp.html">Ban&Pick Impact</a>
+            <ul>
+              <li><a href="ALL team bp.html">see details</a></li>
+              <li><a href="#team">see summary</a></li>
+
+            </ul>
+          </li>
+          <!-- Nav bar for Skt-->
+          <li class="menu-has-children"><a href="skt-page.html">SKT Analysis</a>
+            <ul>
+              <li><a href="skt-page.html">see details</a></li>
+              <li><a href="#SKT-homePage">see summary</a></li>
+
+            </ul>
+          </li>
+
         </ul>
       </nav><!-- #nav-menu-container -->
     </div>
@@ -82,6 +88,9 @@
     Intro Section
   ============================-->
   <section id="intro">
+
+
+
     <div class="intro-container">
       <div id="introCarousel" class="carousel  slide carousel-fade" data-ride="carousel">
 
@@ -90,22 +99,10 @@
         <div class="carousel-inner" role="listbox">
 
           <div class="carousel-item active">
-            <div class="carousel-background"><img src="img/intro-carousel/SKT.jpg" alt=""></div>
-            <div class="carousel-container">
-              <div class="carousel-content">
-                <h2>The secret SKT </h2>
-                <p> The champion team in LCK</p>
-                <a href="skt-page.html" class="btn-get-started scrollto">View more</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="carousel-item">
             <div class="carousel-background"><img src="img/intro-carousel/2.jpg" alt=""></div>
             <div class="carousel-container">
               <div class="carousel-content">
-                <h2> role analysis</h2>
-                <p>impact of the march result</p>
+                <h2> Role Impact</h2>
                 <a href="roleImpact.html" class="btn-get-started scrollto">View more</a>
               </div>
             </div>
@@ -115,9 +112,8 @@
             <div class="carousel-background"><img src="img/intro-carousel/3.jpg" alt=""></div>
             <div class="carousel-container">
               <div class="carousel-content">
-                <h2>bubble chart</h2>
-                <p> bubble chart</p>
-                <a href="LOL-bubble chart/LOL-bubble.html" class="btn-get-started scrollto">View more</a>
+                <h2>Team Color</h2>
+                <a href="linepage.html" class="btn-get-started scrollto">View more</a>
               </div>
             </div>
           </div>
@@ -126,24 +122,22 @@
             <div class="carousel-background"><img src="img/intro-carousel/4.jpg" alt=""></div>
             <div class="carousel-container">
               <div class="carousel-content">
-                <h2>tree map</h2>
-                <p> tree map</p>
-                <a href="#featured-services" class="btn-get-started scrollto">View more</a>
+                <h2>Ban&Pick Impact</h2>
+                <a href="ALL team bp.html" class="btn-get-started scrollto">View more</a>
               </div>
             </div>
           </div>
 
-          <div class="carousel-item">
-            <div class="carousel-background"><img src="img/intro-carousel/5.jpg" alt=""></div>
+          <div class="carousel-item ">
+            <div class="carousel-background"><img src="img/intro-carousel/SKT.jpg" alt=""></div>
             <div class="carousel-container">
               <div class="carousel-content">
-                <h2>world map</h2>
-                <p>world map</p>
-                <a href="#featured-services" class="btn-get-started scrollto">View more</a>
+                <h2>The secret of SKT </h2>
+                <p> The champion team in LCK</p>
+                <a href="skt-page.html" class="btn-get-started scrollto">View more</a>
               </div>
             </div>
           </div>
-
         </div>
 
         <a class="carousel-control-prev" href="#introCarousel" role="button" data-slide="prev">
@@ -161,114 +155,57 @@
   </section><!-- #intro -->
 
   <main id="main">
-    <section id="about"  class="wow fadeIn">
-      <div class="container">
 
-        <header class="section-header">
-          <h3>SKT </h3>
-          <p> - One Of the greatest professional gaming team</p>
-
-        </header>
-        <div class="facts-img">
-          <img src="img/SKT B&P.jpg" alt="" class="img-fluid">
-        </div>
-
-        <div class="row counters">
-
-
-          <div class="col-lg-3 col-6 text-center">
-            <span data-toggle="counter-up">56</span>
-            <p>2015 pick champions: RekSai </p>
-          </div>
-
-          <div class="col-lg-3 col-6 text-center">
-            <span data-toggle="counter-up">42</span>
-            <p>2016 pick champions: Gragas </p>
-          </div>
-          <div class="col-lg-3 col-6 text-center">
-            <span data-toggle="counter-up">56</span>
-            <p>2017 pick champions: Ezreals </p>
-          </div>
-          <a href="bubbleSKTPick.html" class="btn-get-started scrollto">View more</a>
-
-          <div class="col-lg-3 col-6 text-center">
-            <span data-toggle="counter-up">40</span>
-            <p>2015 ban champions: RekSai </p>
-          </div>
-          <div class="col-lg-3 col-6 text-center">
-            <span data-toggle="counter-up">73</span>
-            <p>2016 pick champions: Nidalee </p>
-          </div>
-          <div class="col-lg-3 col-6 text-center">
-            <span data-toggle="counter-up">22</span>
-            <p>2017 pick champions: Camille </p>
-          </div>
-
-          <a href="bubbleSKTBan.html" class="btn-get-started scrollto">View more</a>
-
-        </div>
-
-
-
-      </div>
-    </section>
-
-
-
-
-    <!--==========================
-      Role impact for the march result Section
-    ============================-->
 
     <section id="skills">
       <div class="container">
+        <header class="section-header">
+          <h3>Role impact for the march result</h3>
+          <p>the winning team</p>
+
+        </header>
+      </div>
+
+      <div class="skills-content">
+        <div class="progress">
+          <div class="progress-bar bg-secondary " role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
+            <span class="skill">TOP <i class="val">90%</i></span>
+
+          </div>
+        </div>
+        <div class="progress">
+          <div class="progress-bar bg-success" role="progressbar" aria-valuenow="92" aria-valuemin="0" aria-valuemax="100">
+            <span class="skill">JUNGLE <i class="val">92%</i></span>
+
+          </div>
+        </div>
+
+        <div class="progress">
+          <div class="progress-bar bg-info" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">
+            <span class="skill">ADC <i class="val">95%</i></span>
+          </div>
+        </div>
+
+        <div class="progress">
+          <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
+            <span class="skill">SUPPORT<i class="val">85%</i></span>
+          </div>
+        </div>
+
+        <div class="progress">
+          <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="92" aria-valuemin="0" aria-valuemax="100">
+            <span class="skill">MIDDLE <i class="val">92%</i></span>
+          </div>
+        </div>
+        <a href="roleImpact.html" class="btn-get-started scrollto">View more</a>
+        <div class="container">
+
           <header class="section-header">
-            <h3>Role impact for the march result</h3>
-            <p>the winning team</p>
+            <p>the losing team</p>
 
           </header>
         </div>
-
-        <div class="skills-content">
-          <div class="progress">
-            <div class="progress-bar bg-secondary " role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
-              <span class="skill">TOP <i class="val">90%</i></span>
-
-            </div>
-          </div>
-          <div class="progress">
-            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="92" aria-valuemin="0" aria-valuemax="100">
-              <span class="skill">JUNGLE <i class="val">92%</i></span>
-
-            </div>
-          </div>
-
-          <div class="progress">
-            <div class="progress-bar bg-info" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">
-              <span class="skill">ADC <i class="val">95%</i></span>
-            </div>
-          </div>
-
-          <div class="progress">
-            <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
-              <span class="skill">SUPPORT<i class="val">85%</i></span>
-            </div>
-          </div>
-
-          <div class="progress">
-            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="92" aria-valuemin="0" aria-valuemax="100">
-              <span class="skill">MIDDLE <i class="val">92%</i></span>
-            </div>
-          </div>
-          <a href="LOL-bar cart/Bar chart.html" class="btn-get-started scrollto">View more</a>
-          <div class="container">
-
-            <header class="section-header">
-              <p>the losing team</p>
-
-            </header>
-          </div>
-        </div>
+      </div>
       <div class="progress">
         <div class="progress-bar bg-secondary " role="progressbar" aria-valuenow="93" aria-valuemin="0" aria-valuemax="100">
           <span class="skill">TOP <i class="val">93%</i></span>
@@ -299,8 +236,203 @@
           <span class="skill">MIDDLE <i class="val">85%</i></span>
         </div>
       </div>
-        <a href="LOL-bar cart/Bar chart.html" class="btn-get-started scrollto">View more</a>
+      <a href="roleImpact.html" class="btn-get-started scrollto">View more</a>
       </div>
+
+      </div>
+    </section>
+    <section id="BanPick" class="wow fadeIn">
+      <div class="container text-center">
+        <h3>Team Color Impact</h3>
+        <p> </p>
+        <a class="cta-btn" href="ALL team bp.html">View More</a>
+      </div>
+    </section>
+
+
+
+    <section id="team">
+      <div class="container">
+        <div class="section-header wow fadeInUp">
+          <h3>Champion Ban&Pick</h3>
+          <p>Some popular champions</p>
+          <li><a href="ALL team bp.html">see how B&P Impact the march result</a></li>
+        </div>
+
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6 wow fadeInUp">
+            <div class="member">
+              <img src="img/team-1.jpg" class="img-fluid" alt="">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>Yuumi</h4>
+                  <span>Support</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="member">
+              <img src="img/team-2.jpg" class="img-fluid" alt="">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>Lulu</h4>
+                  <span>MIDDLE</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
+            <div class="member">
+              <img src="img/team-3.jpg" class="img-fluid" alt="">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>Gnar</h4>
+                  <span>Top</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+            <div class="member">
+              <img src="img/team-4.jpg" class="img-fluid" alt="">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>Teemo</h4>
+                  <span>ADC</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <section id="SKT-homePage"  class="wow fadeIn">
+      <div class="container">
+
+        <header class="section-header">
+          <h3>SKT Ban&Pick Preference</h3>
+          <p> - One Of the greatest professional gaming team</p>
+          <a href="skt-page.html" class="btn-get-started scrollto">View more</a>
+        </header>
+<div>
+        <div class="row counters">
+
+
+          <div class="col-lg-4 col-6 text-center">
+            <span data-toggle="counter-up">56</span>
+            <p>2015 pick champions: RekSai </p>
+          </div>
+
+          <div class="col-lg-4 col-6 text-center">
+            <span data-toggle="counter-up">42</span>
+            <p>2016 pick champions: Gragas </p>
+          </div>
+          <div class="col-lg-4 col-6 text-center">
+            <span data-toggle="counter-up">56</span>
+            <p>2017 pick champions: Ezreals </p>
+          </div>          </div>
+  <div>
+    <div class="row counters">
+          <div class="col-lg-4 col-6 text-center">
+            <span data-toggle="counter-up">40</span>
+            <p>2015 ban champions: RekSai </p>
+          </div>
+          <div class="col-lg-4 col-6 text-center">
+            <span data-toggle="counter-up">73</span>
+            <p>2016 ban champions: Nidalee </p>
+          </div>
+          <div class="col-lg-4 col-6 text-center">
+            <span data-toggle="counter-up">22</span>
+            <p>2017 ban champions: Camille </p>
+          </div>
+
+
+
+        </div>
+</div>
+        <header class="section-header">
+          <h3>SKT Team color</h3>
+          <p> - Blue&Red team: the ratio of winning  </p>
+
+        </header>
+      <div>
+        <div class="row counters">
+
+          <div class="col-lg-4 col-6 text-center">
+            <span data-toggle="counter-up">56</span>
+            <p>blue team: 2015 win the march </p>
+          </div>
+
+          <div class="col-lg-4 col-6 text-center">
+            <span data-toggle="counter-up">62</span>
+            <p>blue team: 2016 win the march </p>
+          </div>
+          <div class="col-lg-4 col-6 text-center">
+            <span data-toggle="counter-up">56</span>
+            <p>blue team: 2017 win the march </p>
+          </div>
+        </div>
+        <div>
+          <div class="row counters">
+          <div class="col-lg-4 col-6 text-center">
+            <span data-toggle="counter-up">40</span>
+            <p>red team: 2015 win the march  </p>
+          </div>
+          <div class="col-lg-4 col-6 text-center">
+            <span data-toggle="counter-up">53</span>
+            <p>red team: 2016 win the march  </p>
+          </div>
+          <div class="col-lg-4 col-6 text-center">
+            <span data-toggle="counter-up">42</span>
+            <p>blue team: 2015 win the march </p>
+          </div>
+          </div>
+
+        </div>
+        <header class="section-header">
+          <h3>SKT: Role Impacts</h3>
+          <p> - Different roles: the normal ratio of Carry   </p>
+
+        </header>
+        <div>
+        <div class="row counters">
+
+          <div class="col-lg-4 col-6 text-center">
+            <span data-toggle="counter-up">96</span>
+            <p>ADC </p>
+          </div>
+
+          <div class="col-lg-4 col-6 text-center">
+            <span data-toggle="counter-up">92</span>
+            <p>SUPPORT </p>
+          </div>
+          <div class="col-lg-4 col-6 text-center">
+            <span data-toggle="counter-up">56</span>
+            <p>MIDDLE </p>
+          </div>
+          <div class="col-lg-6 col-6 text-center">
+            <span data-toggle="counter-up">56</span>
+            <p>JUNGLE </p>
+          </div>
+          <div class="col-lg-6 col-6 text-center">
+            <span data-toggle="counter-up">42</span>
+            <p>TOP </p>
+          </div>
+
+        </div>
+          </div>
+
+       <!-- <div class="facts-img">
+          <img src="img/SKT-V1.jpg" alt="" class="img-fluid">
+        </div>-->
 
       </div>
     </section>

@@ -2,32 +2,77 @@
 <html lang="en">
 <head>
     <style>
-        body {
-            background-color: #F1F3F3
+
+
+        text {
+            font: 10px sans-serif;
         }
-        svg {
-            font-family: Sans-Serif, Arial;
+
+
+        #chart {
+            background: #fff;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
         }
-        .line {
-            stroke-width: 2;
+
+        .title {
+            font-weight: bold;
+            font-size: 24px;
+            text-align: center;
+            margin-top: 6px;
+            margin-bottom: 6px;
+        }
+        text {
+            pointer-events: none;
+        }
+
+        .grandparent text {
+            font-weight: bold;
+        }
+
+        rect {
             fill: none;
+            stroke: #fff;
         }
 
-        .axis path {
-            stroke: black;
+        rect.parent,
+        .grandparent rect {
+            stroke-width: 2px;
         }
 
-        .text {
-            font-size: 12px;
+        rect.parent {
+            pointer-events: none;
         }
 
-        .title-text {
-            font-size: 12px;
+        .grandparent rect {
+            fill: orange;
         }
+
+        .grandparent:hover rect {
+            fill: #ee9700;
+        }
+
+        .children rect.parent,
+        .grandparent rect {
+            cursor: pointer;
+        }
+
+        .children rect.parent {
+            fill: #bbb;
+            fill-opacity: .5;
+        }
+
+        .children:hover rect.child {
+            fill: #bbb;
+        }
+
     </style>
     <meta charset="utf-8">
     <title>fit5147</title>
-    <script src="d3.min.js"></script>
+
+
+    <script src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+
     <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
 
 
@@ -66,36 +111,26 @@
 
         <div id="logo" class="pull-left">
             <h1><a href="#intro" class="scrollto">league of legends</a></h1>
-
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <!-- <a href="#intro"><img src="img/logo.png" alt="" title="" /></a>-->
         </div>
 
         <nav id="nav-menu-container">
             <ul class="nav-menu">
                 <li class="menu-active"><a href="index.html">Home</a></li>
 
-
-                <li class="menu-has-children"><a href="">SKT Analysis</a>
-                    <ul>
-                        <li><a href="barpage.html">see details</a></li>
-                        <li><a href="#about">see summary</a></li>
-
-                    </ul>
+                <li class="menu-has-children"><a href="">Role Impact</a>
                 </li>
-                <li class="menu-has-children"><a href="">Team Color Analysis</a>
-                    <ul>
-                        <li><a href="barpage.html">see details</a></li>
-                        <li><a href="#about">see summary</a></li>
-
-                    </ul>
+                <!-- Nav bar for team color-->
+                <li class="menu-has-children"><a href="linepage.html">Team Color Impact</a>
                 </li>
-                <li class="menu-has-children"><a href="">Role Analysis</a>
-                    <ul>
-                        <li><a href="barpage.html">see details</a></li>
-                        <li><a href="#about">see summary</a></li>
-
-                    </ul>
+                <!-- Nav bar for b&p -->
+                <li class="menu-has-children"><a href="ALL team bp.html">Ban&Pick Impact</a>
                 </li>
-                <li><a href="#contact">Contact</a></li>
+                <!-- Nav bar for Skt-->
+                <li class="menu-has-children"><a href="skt-page.html">SKT Analysis</a>
+                </li>
+
             </ul>
         </nav><!-- #nav-menu-container -->
     </div>
@@ -128,209 +163,354 @@
 
 <main id="main">
 
-
+    <section id="about"  class="wow fadeIn">
     <div class="container">
 
         <div class="section-header">
-            <h3>player's personal impact</h3>
-            <p></p>
-        </div>
 
+            <h3>Ban&pick of all teams</h3>
+        </div>
         <div id="chart" style="text-align: center"></div>
         <script>
 
-            var data = [
-                {
-                    name: "red team",
-                    values: [
-                        {YEAR: "2014", victory: "44"},
-                        {YEAR: "2015", victory: "40"},
-                        {YEAR: "2016", victory: "42"},
-                        {YEAR: "2017", victory: "48"},
-                        {YEAR: "2018", victory: null}
-                    ]
-                },
-                {
-                    name: "blue",
-                    values: [
-                        {YEAR: "2014", victory: "56"},
-                        {YEAR: "2015", victory: "60"},
-                        {YEAR: "2016", victory: "58"},
-                        {YEAR: "2017", victory: "52"},
-                        {YEAR: "2018", victory: null}
-                    ]
-                },
-                {
-                    name: "Both team",
-                    values: [
-                        {YEAR: "2014", victory: "50"},
-                        {YEAR: "2015", victory: "50"},
-                        {YEAR: "2016", victory: "50"},
-                        {YEAR: "2017", victory: "50"},
-                        {YEAR: "2018", victory: null}
-                    ]
-                }
-            ];
+            window.addEventListener('message', function(e) {
+                var opts = e.data.opts,
+                    data = e.data.data;
 
-            var width = 500;
-            var height = 300;
-            var margin = 50;
-            var duration = 250;
-
-            var lineOpacity = "0.25";
-            var lineOpacityHover = "0.85";
-            var otherLinesOpacityHover = "0.1";
-            var lineStroke = "1.5px";
-            var lineStrokeHover = "2.5px";
-
-            var circleOpacity = '0.85';
-            var circleOpacityOnLineHover = "0.25"
-            var circleRadius = 3;
-            var circleRadiusHover = 6;
-
-
-            /* Format Data */
-            var parseYEAR = d3.timeParse("%Y");
-            data.forEach(function(d) {
-                d.values.forEach(function(d) {
-                    d.YEAR = parseYEAR(d.YEAR);
-                    d.victory = +d.victory;
-                });
+                return main(opts, data);
             });
 
+            var defaults = {
+                margin: {top: 24, right: 0, bottom: 0, left: 0},
+                rootname: "TOP",
+                format: ",d",
+                title: "",
+                width: 960,
+                height: 500
+            };
 
-            /* Scale */
-            var xScale = d3.scaleTime()
-                .domain(d3.extent(data[0].values, d => d.YEAR))
-                .range([0, width-margin]);
+            function main(o, data) {
+                var root,
+                    opts = $.extend(true, {}, defaults, o),
+                    formatNumber = d3.format(opts.format),
+                    rname = opts.rootname,
+                    margin = opts.margin,
+                    theight = 36 + 16;
 
-            var yScale = d3.scaleLinear()
-                .domain([0, 100])
-                .range([height-margin, 0]);
+                $('#chart').width(opts.width).height(opts.height);
+                var width = opts.width - margin.left - margin.right,
+                    height = opts.height - margin.top - margin.bottom - theight,
+                    transitioning;
 
-            var color = d3.scaleOrdinal(d3.schemeCategory10);
+                var color = d3.scale.category20c();
 
-            /* Add SVG */
-            var svg = d3.select("#chart").append("svg")
-                .attr("width", (width+margin)+"px")
-                .attr("height", (height+margin)+"px")
-                .append('g')
-                .attr("transform", `translate(${margin}, ${margin})`);
+                var x = d3.scale.linear()
+                    .domain([0, width])
+                    .range([0, width]);
 
+                var y = d3.scale.linear()
+                    .domain([0, height])
+                    .range([0, height]);
+                var treemap = d3.layout.treemap()
+                    .children(function(d, depth) { return depth ? null : d._children; })
+                    .sort(function(a, b) { return a.value - b.value; })
+                    .ratio(height / width * 0.5 * (1 + Math.sqrt(5)))
+                    .round(false);
 
-            /* Add line into SVG */
-            var line = d3.line()
-                .x(d => xScale(d.YEAR))
-                .y(d => yScale(d.victory));
+                var svg = d3.select("#chart").append("svg")
+                    .attr("width", width + margin.left + margin.right)
+                    .attr("height", height + margin.bottom + margin.top)
+                    .style("margin-left", -margin.left + "px")
+                    .style("margin.right", -margin.right + "px")
+                    .append("g")
+                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+                    .style("shape-rendering", "crispEdges");
 
-            let lines = svg.append('g')
-                .attr('class', 'lines');
+                var grandparent = svg.append("g")
+                    .attr("class", "grandparent");
 
-            lines.selectAll('.line-group')
-                .data(data).enter()
-                .append('g')
-                .attr('class', 'line-group')
-                .on("mouseover", function(d, i) {
-                    svg.append("text")
-                        .attr("class", "title-text")
-                        .style("fill", color(i))
-                        .text("team color is "+d.name)
-                        .attr("text-anchor", "middle")
-                        .attr("x", (width-margin)/2)
-                        .attr("y", 5);
-                })
-                .on("mouseout", function(d) {
-                    svg.select(".title-text").remove();
-                })
-                .append('path')
-                .attr('class', 'line')
-                .attr('d', d => line(d.values))
-                .style('stroke', (d, i) => color(i))
-                .style('opacity', lineOpacity)
-                .on("mouseover", function(d) {
-                    d3.selectAll('.line')
-                        .style('opacity', otherLinesOpacityHover);
-                    d3.selectAll('.circle')
-                        .style('opacity', circleOpacityOnLineHover);
-                    d3.select(this)
-                        .style('opacity', lineOpacityHover)
-                        .style("stroke-width", lineStrokeHover)
-                        .style("cursor", "pointer");
-                })
-                .on("mouseout", function(d) {
-                    d3.selectAll(".line")
-                        .style('opacity', lineOpacity);
-                    d3.selectAll('.circle')
-                        .style('opacity', circleOpacity);
-                    d3.select(this)
-                        .style("stroke-width", lineStroke)
-                        .style("cursor", "none");
+                grandparent.append("rect")
+                    .attr("y", -margin.top)
+                    .attr("width", width)
+                    .attr("height", margin.top);
+
+                grandparent.append("text")
+                    .attr("x", 6)
+                    .attr("y", 6 - margin.top)
+                    .attr("dy", ".75em");
+
+                if (opts.title) {
+                    $("#chart").prepend("<p class='title'>" + opts.title + "</p>");
+                }
+                if (data instanceof Array) {
+                    root = { key: rname, values: data };
+                } else {
+                    root = data;
+                }
+
+                initialize(root);
+                accumulate(root);
+                layout(root);
+                console.log(root);
+                display(root);
+
+                if (window.parent !== window) {
+                    var myheight = document.documentElement.scrollHeight || document.body.scrollHeight;
+                    window.parent.postMessage({height: myheight}, '*');
+                }
+
+                function initialize(root) {
+                    root.x = root.y = 0;
+                    root.dx = width;
+                    root.dy = height;
+                    root.depth = 0;
+                }
+
+                // Aggregate the values for internal nodes. This is normally done by the
+                // treemap layout, but not here because of our custom implementation.
+                // We also take a snapshot of the original children (_children) to avoid
+                // the children being overwritten when when layout is computed.
+                function accumulate(d) {
+                    return (d._children = d.values)
+                        ? d.value = d.values.reduce(function(p, v) { return p + accumulate(v); }, 0)
+                        : d.value;
+                }
+
+                // Compute the treemap layout recursively such that each group of siblings
+                // uses the same size (1×1) rather than the dimensions of the parent cell.
+                // This optimizes the layout for the current zoom state. Note that a wrapper
+                // object is created for the parent node for each group of siblings so that
+                // the parent’s dimensions are not discarded as we recurse. Since each group
+                // of sibling was laid out in 1×1, we must rescale to fit using absolute
+                // coordinates. This lets us use a viewport to zoom.
+                function layout(d) {
+                    if (d._children) {
+                        treemap.nodes({_children: d._children});
+                        d._children.forEach(function(c) {
+                            c.x = d.x + c.x * d.dx;
+                            c.y = d.y + c.y * d.dy;
+                            c.dx *= d.dx;
+                            c.dy *= d.dy;
+                            c.parent = d;
+                            layout(c);
+                        });
+                    }
+                }
+
+                function display(d) {
+                    grandparent
+                        .datum(d.parent)
+                        .on("click", transition)
+                        .select("text")
+                        .text(name(d));
+
+                    var g1 = svg.insert("g", ".grandparent")
+                        .datum(d)
+                        .attr("class", "depth");
+
+                    var g = g1.selectAll("g")
+                        .data(d._children)
+                        .enter().append("g");
+
+                    g.filter(function(d) { return d._children; })
+                        .classed("children", true)
+                        .on("click", transition);
+
+                    var children = g.selectAll(".child")
+                        .data(function(d) { return d._children || [d]; })
+                        .enter().append("g");
+
+                    children.append("rect")
+                        .attr("class", "child")
+                        .call(rect)
+                        .append("title")
+                        .text(function(d) { return d.key + " (" + formatNumber(d.value) + ")"; });
+                    children.append("text")
+                        .attr("class", "ctext")
+                        .text(function(d) { return d.key; })
+                        .call(text2);
+
+                    g.append("rect")
+                        .attr("class", "parent")
+                        .call(rect);
+
+                    var t = g.append("text")
+                        .attr("class", "ptext")
+                        .attr("dy", ".75em")
+
+                    t.append("tspan")
+                        .text(function(d) { return d.key; });
+                    t.append("tspan")
+                        .attr("dy", "1.0em")
+                        .text(function(d) { return formatNumber(d.value); });
+                    t.call(text);
+
+                    g.selectAll("rect")
+                        .style("fill", function(d) { return color(d.key); });
+
+                    function transition(d) {
+                        if (transitioning || !d) return;
+                        transitioning = true;
+
+                        var g2 = display(d),
+                            t1 = g1.transition().duration(750),
+                            t2 = g2.transition().duration(750);
+
+                        // Update the domain only after entering new elements.
+                        x.domain([d.x, d.x + d.dx]);
+                        y.domain([d.y, d.y + d.dy]);
+
+                        // Enable anti-aliasing during the transition.
+                        svg.style("shape-rendering", null);
+
+                        // Draw child nodes on top of parent nodes.
+                        svg.selectAll(".depth").sort(function(a, b) { return a.depth - b.depth; });
+
+                        // Fade-in entering text.
+                        g2.selectAll("text").style("fill-opacity", 0);
+
+                        // Transition to the new view.
+                        t1.selectAll(".ptext").call(text).style("fill-opacity", 0);
+                        t1.selectAll(".ctext").call(text2).style("fill-opacity", 0);
+                        t2.selectAll(".ptext").call(text).style("fill-opacity", 1);
+                        t2.selectAll(".ctext").call(text2).style("fill-opacity", 1);
+                        t1.selectAll("rect").call(rect);
+                        t2.selectAll("rect").call(rect);
+
+                        // Remove the old node when the transition is finished.
+                        t1.remove().each("end", function() {
+                            svg.style("shape-rendering", "crispEdges");
+                            transitioning = false;
+                        });
+                    }
+
+                    return g;
+                }
+
+                function text(text) {
+                    text.selectAll("tspan")
+                        .attr("x", function(d) { return x(d.x) + 6; })
+                    text.attr("x", function(d) { return x(d.x) + 6; })
+                        .attr("y", function(d) { return y(d.y) + 6; })
+                        .style("opacity", function(d) { return this.getComputedTextLength() < x(d.x + d.dx) - x(d.x) ? 1 : 0; });
+                }
+
+                function text2(text) {
+                    text.attr("x", function(d) { return x(d.x + d.dx) - this.getComputedTextLength() - 6; })
+                        .attr("y", function(d) { return y(d.y + d.dy) - 6; })
+                        .style("opacity", function(d) { return this.getComputedTextLength() < x(d.x + d.dx) - x(d.x) ? 1 : 0; });
+                }
+
+                function rect(rect) {
+                    rect.attr("x", function(d) { return x(d.x); })
+                        .attr("y", function(d) { return y(d.y); })
+                        .attr("width", function(d) { return x(d.x + d.dx) - x(d.x); })
+                        .attr("height", function(d) { return y(d.y + d.dy) - y(d.y); });
+                }
+
+                function name(d) {
+                    return d.parent
+                        ? name(d.parent) + " / " + d.key + " (" + formatNumber(d.value) + ")"
+                        : d.key + " (" + formatNumber(d.value) + ")";
+                }
+            }
+
+            if (window.location.hash === "") {
+                d3.json("tree map.json", function(err, res) {
+                    if (!err) {
+                        console.log(res);
+                        var data = d3.nest().key(function(d) { return d.region; }).key(function(d) { return d.subregion; }).entries(res);
+                        main({title: "Top 10 picking champion of all teams from 2014 to 2017"}, {key: "Total champion selected ", values: data});
+                    }
                 });
+            }
 
-
-            /* Add circles in the line */
-            lines.selectAll("circle-group")
-                .data(data).enter()
-                .append("g")
-                .style("fill", (d, i) => color(i))
-                .selectAll("circle")
-                .data(d => d.values).enter()
-                .append("g")
-                .attr("class", "circle")
-                .on("mouseover", function(d) {
-                    d3.select(this)
-                        .style("cursor", "pointer")
-                        .append("text")
-                        .attr("class", "text")
-                        .text(`${+d.victory}`)
-                        .attr("x", d => xScale(d.YEAR) + 5)
-                        .attr("y", d => yScale(d.victory) - 10);
-                })
-                .on("mouseout", function(d) {
-                    d3.select(this)
-                        .style("cursor", "none")
-                        .transition()
-                        .duration(duration)
-                        .selectAll(".text").remove();
-                })
-                .append("circle")
-                .attr("cx", d => xScale(d.YEAR))
-                .attr("cy", d => yScale(d.victory))
-                .attr("r", circleRadius)
-                .style('opacity', circleOpacity)
-                .on("mouseover", function(d) {
-                    d3.select(this)
-                        .transition()
-                        .duration(duration)
-                        .attr("r", circleRadiusHover);
-                })
-                .on("mouseout", function(d) {
-                    d3.select(this)
-                        .transition()
-                        .duration(duration)
-                        .attr("r", circleRadius);
-                });
-
-
-            /* Add Axis into SVG */
-            var xAxis = d3.axisBottom(xScale).ticks(5);
-            var yAxis = d3.axisLeft(yScale).ticks(5);
-
-            svg.append("g")
-                .attr("class", "x axis")
-                .attr("transform", `translate(0, ${height-margin})`)
-                .call(xAxis);
-
-            svg.append("g")
-                .attr("class", "y axis")
-                .call(yAxis)
-                .append('text')
-                .attr("y", 15)
-                .attr("transform", "rotate(-90)")
-                .attr("fill", "#000")
-                .text("Winning Percentage");
         </script>
+
     </div>
+    </section>
+
+    <section id="services">
+        <section  class="wow fadeIn">
+            <div class="container">
+
+                <div class="section-header">
+
+                    <h3>Ban&pick of all teams</h3>
+                </div>
+                <div id="BUBBLEchart" style="text-align: center"></div>
+        <script>
+
+            var diameter = 960,
+                format = d3.format(",d"),
+                color = d3.scale.category20c();
+
+            var bubble = d3.layout.pack()
+                .sort(null)
+                .size([diameter, diameter])
+                .padding(1.5);
+
+            var svg = d3.select("body").append("svg")
+                .attr("width", diameter)
+                .attr("height", diameter)
+                .attr("class", "bubble");
+
+            var tooltip = d3.select("body")
+                .append("div")
+                .style("position", "absolute")
+                .style("z-index", "10")
+                .style("visibility", "hidden")
+                .style("color", "white")
+                .style("padding", "8px")
+                .style("background-color", "rgba(0, 0, 0, 0.75)")
+                .style("border-radius", "6px")
+                .style("font", "12px sans-serif")
+                .text("tooltip");
+
+            d3.json("testdata.json", function(error, root) {
+                var node = svg.selectAll(".node")
+                    .data(bubble.nodes(classes(root))
+                        .filter(function(d) { return !d.children; }))
+                    .enter().append("g")
+                    .attr("class", "node")
+                    .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+
+                node.append("circle")
+                    .attr("r", function(d) { return d.r; })
+                    .style("fill", function(d) { return color(d.packageName); })
+                    .on("mouseover", function(d) {
+                        tooltip.text(d.className + ": " + format(d.value));
+                        tooltip.style("visibility", "visible");
+                    })
+                    .on("mousemove", function() {
+                        return tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");
+                    })
+                    .on("mouseout", function(){return tooltip.style("visibility", "hidden");});
+
+                node.append("text")
+                    .attr("dy", ".3em")
+                    .style("text-anchor", "middle")
+                    .style("pointer-events", "none")
+                    .text(function(d) { return d.className.substring(0, d.r / 3); });
+            });
+
+            // Returns a flattened hierarchy containing all leaf nodes under the root.
+            function classes(root) {
+                var classes = [];
+
+                function recurse(name, node) {
+                    if (node.children) node.children.forEach(function(child) { recurse(node.name, child); });
+                    else classes.push({packageName: name, className: node.name, value: node.size});
+                }
+
+                recurse(null, root);
+                return {children: classes};
+            }
+
+            d3.select(self.frameElement).style("height", diameter + "px");
+
+        </script>
+    </section>
 </main>
 
 
